@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    TaskRepository taskRepository;
+   private final TaskRepository taskRepository;
 
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
@@ -35,5 +35,13 @@ public class TaskService {
 
     public List<Task> getTasksByPlayer(Player player) {
         return taskRepository.findByPlayer(player);
+    }
+
+    public Task saveTask(Task task) {
+        return taskRepository.save(task);
+    }
+
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
     }
 }
