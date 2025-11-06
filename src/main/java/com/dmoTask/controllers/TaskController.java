@@ -108,5 +108,16 @@ public class TaskController {
         return ResponseEntity.ok(TaskMapper.toResponseDTO(updated));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        //verifica se a tarefa existe antes de tentar deletar
+        Optional<Task> existingTask = taskService.getTaskById(id);
+        if(existingTask.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
 
