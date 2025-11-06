@@ -38,11 +38,12 @@ public class TaskController {
                 .map(ResponseEntity:: ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    @GetMapping("{taskType}")
+    @GetMapping("/type/{taskType}")
     public ResponseEntity<List<Task>> getTaskByType(@PathVariable TaskType taskType){
         return ResponseEntity.ok(taskService.getTaskByType(taskType));
     }
 
+    @GetMapping("/by-player")
     public ResponseEntity<?> getTaskByPLayer(
             @RequestParam(required = false) Long playerId,
             @RequestParam(required = false) String characterName,
